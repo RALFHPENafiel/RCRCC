@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RC Ramos Construction - Project Page CTA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        .rcrcc-project-cta {
+            background: linear-gradient(135deg, #ffde2188 0%, #ff7300 50%, #ffde2171 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rcrcc-project-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .rcrcc-project-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: #ffffff;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .rcrcc-project-description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .rcrcc-project-cta-actions {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .rcrcc-project-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .rcrcc-project-btn-primary {
+            background-color: #ffffff;
+            color: #FF4500;
+            border: 2px solid #FF4500;
+        }
+
+        .rcrcc-project-btn-primary:hover {
+            background-color: #FF4500;
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+        }
+
+        .rcrcc-project-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .rcrcc-project-btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: #FF4500;
+            border-color: #FF4500;
+        }
+
+        .rcrcc-project-btn i {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .rcrcc-project-title {
+                font-size: 2.2rem;
+            }
+
+            .rcrcc-project-description {
+                font-size: 1rem;
+            }
+
+            .rcrcc-project-cta-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .rcrcc-project-btn {
+                width: 100%;
+                max-width: 300px;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="rcrcc-project-cta">
+        <div class="rcrcc-project-content">
+            <h1 class="rcrcc-project-title">Your Vision, Our Expertise</h1>
+            <p class="rcrcc-project-description">
+                At RC Ramos Construction, we turn architectural dreams into tangible realities. 
+                Our commitment to innovation, precision, and quality ensures that every project 
+                we undertake becomes a benchmark of excellence.
+            </p>
+            <div class="rcrcc-project-cta-actions">
+                <a href="#consultation" class="rcrcc-project-btn rcrcc-project-btn-primary">
+                    <i class="fas fa-hammer"></i>Start Your Project
+                </a>
+                <a href="#portfolio" class="rcrcc-project-btn rcrcc-project-btn-secondary">
+                    <i class="fas fa-image"></i>Explore Our Portfolio
+                </a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

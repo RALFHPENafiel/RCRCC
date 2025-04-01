@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Ramos Construction - Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Slab:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #0d47a1;
+            --color-secondary: #1976d2;
+            --color-accent: #2196f3;
+            --color-text-dark: #212121;
+            --color-text-light: #ffffff;
+            --color-background: #f5f5f5;
+            --color-muted: #757575;
+            
+            --gradient-primary: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%);
+            
+            --shadow-subtle: 0 4px 6px rgba(0,0,0,0.06);
+            --shadow-medium: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-large: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-dark);
+            background-color: var(--color-background);
+        }
+
+        .projects-header {
+            background: var(--gradient-primary);
+            color: var(--color-text-light);
+            text-align: center;
+            padding: 4rem 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .projects-header h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .projects-header p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .projects-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Roboto Slab', serif;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--color-primary);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--color-accent);
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform: scale(0.95);
+        }
+
+        .carousel-item.active {
+            opacity: 1;
+            visibility: visible;
+            position: relative;
+            transform: scale(1);
+        }
+
+        .carousel-item__content {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            background-color: var(--color-text-light);
+            box-shadow: var(--shadow-large);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .carousel-item__image {
+            flex: 1.2;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .carousel-item__info {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #f9f9f9;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 6px 12px;
+            background-color: var(--color-accent);
+            color: var(--color-text-light);
+            font-size: 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .carousel-item__title {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-primary);
+            line-height: 1.2;
+        }
+
+        .carousel-item__description {
+            color: var(--color-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .project-details {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 1.5rem;
+        }
+
+        .project-detail {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-detail-label {
+            font-size: 0.875rem;
+            color: var(--color-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-detail-value {
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .carousel-control {
+            width: 12px;
+            height: 12px;
+            background-color: var(--color-muted);
+            border-radius: 50%;
+            margin: 0 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-control.active {
+            background-color: var(--color-primary);
+            width: 24px;
+            border-radius: 20px;
+        }
+
+        .carousel__nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .carousel__arrow {
+            background-color: rgba(255,255,255,0.9);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+            pointer-events: auto;
+        }
+
+        .carousel__arrow:hover {
+            background-color: var(--color-primary);
+            color: var(--color-text-light);
+        }
+
+        .carousel__icon {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-primary);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .carousel__arrow:hover .carousel__icon {
+            stroke: var(--color-text-light);
+        }
+
+        @media (max-width: 1024px) {
+            .carousel-item__content {
+                flex-direction: column;
+            }
+
+            .carousel-item__image,
+            .carousel-item__info {
+                flex: 1;
+                width: 100%;
+            }
+
+            .carousel-item__image {
+                height: 300px;
+            }
+
+            .projects-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="projects-header">
+        <div class="wrapper">
+            <h1>Our Construction Projects</h1>
+            <p>
+                At RC Ramos Construction, we transform architectural visions into reality. Our portfolio showcases a diverse range of projects that demonstrate our commitment to excellence, innovation, and sustainable design.
+            </p>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <!-- Signature Projects Section -->
+        <section class="projects-section signature-projects">
+            <h2 class="section-title">Signature Projects</h2>
+            <div class="carousel-container signature-projects-carousel">
+                <div class="carousel">
+                    <div class="carousel__nav">
+                        <span class="signature-moveLeft carousel__arrow" role="button" aria-label="Previous Signature Project">
+                            <svg class="carousel__icon" viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </span>
+                        <span class="signature-moveRight carousel__arrow" role="button" aria-label="Next Signature Project">
+                            <svg class="carousel__icon" viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="carousel-item active">
+                        <div class="carousel-item__content">
+                            <div 
+                                class="carousel-item__image" 
+                                style="background-image: url('/images/4-img.png')"
+                                aria-label="Metropolitan Tower Project"
+                            ></div>
+                            <div class="carousel-item__info">
+                                <span class="project-tag">Signature Project</span>
+                                <h3 class="carousel-item__title">Metropolitan Tower</h3>
+                                <p class="carousel-item__description">
+                                    An iconic skyscraper that redefines urban architecture, integrating sustainable design principles with cutting-edge engineering to create a landmark in the city's skyline.
+                                </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Location</span>
+                                        <span class="project-detail-value">Downtown Metro</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Completion</span>
+                                        <span class="project-detail-value">2022</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Scale</span>
+                                        <span class="project-detail-value">45 Floors</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="carousel-item__content">
+                            <div
+                                class="carousel-item__image"
+                                style="background-image: url('/images/2_img.png')"
+                            ></div>
+                            <div class="carousel-item__info">
+                                <span class="project-tag">Signature Project</span>
+                                <h3 class="carousel-item__title">Riverside Complex</h3>
+                                <p class="carousel-item__description">
+                                    A transformative mixed-use development that seamlessly blends residential, commercial, and recreational spaces, creating a vibrant urban ecosystem along the riverfront.
+                                </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Location</span>
+                                        <span class="project-detail-value">Riverfront District</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Completion</span>
+                                        <span class="project-detail-value">2021</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Scale</span>
+                                        <span class="project-detail-value">3 Buildings</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="carousel-item__content">
+                            <div
+                                class="carousel-item__image"
+                                style="background-image: url('/images/img-1.jpg')"
+                            ></div>
+                            <div class="carousel-item__info">
+                                <span class="project-tag">Signature Project</span>
+                                <h3 class="carousel-item__title">Urban Innovation Center</h3>
+                                <p class="carousel-item__description">
+                                    A state-of-the-art facility designed to foster technological innovation, combining sustainable architecture with advanced infrastructure for modern businesses and research institutions.
+                                </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Location</span>
+                                        <span class="project-detail-value">Tech Hub</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Completion</span>
+                                        <span class="project-detail-value">2023</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Scale</span>
+                                        <span class="project-detail-value">25,000 m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <div class="carousel-control active" data-index="0"></div>
+                    <div class="carousel-control" data-index="1"></div>
+                    <div class="carousel-control" data-index="2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ongoing Projects Section -->
+        <section class="projects-section ongoing-projects">
+            <h2 class="section-title">Ongoing Projects</h2>
+            <div class="carousel-container ongoing-projects-carousel">
+                <div class="carousel">
+                    <div class="carousel__nav">
+                        <span class="ongoing-moveLeft carousel__arrow" role="button" aria-label="Previous Ongoing Project">
+                            <svg class="carousel__icon" viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"/>
+                            </svg>
+                        </span>
+                        <span class="ongoing-moveRight carousel__arrow" role="button" aria-label="Next Ongoing Project">
+                            <svg class="carousel__icon" viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"/>
+                            </svg>
+                        </span>
+                    </div>
+
+                    <div class="carousel-item active">
+                        <div class="carousel-item__content">
+                            <div
+                                class="carousel-item__image"
+                                style="background-image: url('/images/on-going.jpg')"
+                            ></div>
+                            <div class="carousel-item__info">
+                                <span class="project-tag">Ongoing Project</span>
+                                <h3 class="carousel-item__title">Green Campus Development</h3>
+                                <p class="carousel-item__description">
+                                    An innovative educational complex designed to set new standards in sustainable campus architecture, integrating renewable energy, green spaces, and advanced learning environments.
+                                </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Location</span>
+                                        <span class="project-detail-value">University District</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Expected Completion</span>
+                                        <span class="project-detail-value">2025</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Scale</span>
+                                        <span class="project-detail-value">40,000 m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item">
+                        <div class="carousel-item__content">
+                            <div
+                                class="carousel-item__image"
+                                style="background-image: url('/images/ongoing.jpg')"
+                            ></div>
+                            <div class="carousel-item__info">
+                                <span class="project-tag">Ongoing Project</span>
+                                <h3 class="carousel-item__title">Urban Renewal Hub</h3>
+                                <p class="carousel-item__description">
+                                    A comprehensive urban redevelopment initiative transforming a historic district with modern infrastructure, community-centric spaces, and architectural preservation.
+                                </p>
+                                <div class="project-details">
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Location</span>
+                                        <span class="project-detail-value">Historic District</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Expected Completion</span>
+                                        <span class="project-detail-value">2024</span>
+                                    </div>
+                                    <div class="project-detail">
+                                        <span class="project-detail-label">Scale</span>
+                                        <span class="project-detail-value">5 City Blocks</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <div class="carousel-control active" data-index="0"></div>
+                    <div class="carousel-control" data-index="1"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function initializeCarousel(
+            carouselClass,
+            moveLeftClass,
+            moveRightClass,
+            controlsClass
+        ) {
+            const carouselContainer = document.querySelector(carouselClass);
+            const carousel = carouselContainer.querySelector(".carousel");
+            const carouselItems = carousel.querySelectorAll(".carousel-item");
+            const moveLeft = carouselContainer.querySelector(moveLeftClass);
+            const moveRight = carouselContainer.querySelector(moveRightClass);
+            const carouselControls = carouselContainer.querySelectorAll(".carousel-control");
+            const total = carouselItems.length;
+            let current = 0;
+
+            function setSlide(prev, next) {
+                carouselItems[prev].classList.remove("active");
+                carouselControls[prev].classList.remove("active");
+
+                if (next > total - 1) next = 0;
+                if (next < 0) next = total - 1;
+
+                carouselItems[next].classList.add("active");
+                carouselControls[next].classList.add("active");
+                current = next;
+            }
+
+            moveRight.addEventListener("click", function () {
+                const prev = current;
+                const next = current + 1;
+                setSlide(prev, next);
+            });
+
+            moveLeft.addEventListener("click", function () {
+                const prev = current;
+                const next = current - 1;
+                setSlide(prev, next);
+            });
+
+            carouselControls.forEach(control => {
+                control.addEventListener("click", function() {
+                    const index = parseInt(this.getAttribute("data-index"));
+                    setSlide(current, index);
+                });
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            initializeCarousel(
+                ".signature-projects-carousel",
+                ".signature-moveLeft",
+                ".signature-moveRight",
+                ".signature-projects-carousel .carousel-control"
+            );
+            initializeCarousel(
+                ".ongoing-projects-carousel",
+                ".ongoing-moveLeft",
+                ".ongoing-moveRight",
+                ".ongoing-projects-carousel .carousel-control"
+            );
+        });
+    </script>
+</body>
+</html>
