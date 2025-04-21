@@ -1,0 +1,4 @@
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*videos/hrscn.mp4 filter=lfs diff=lfs merge=lfs -text
+videos/hrscn.mp4 filter=lfs diff=lfs merge=lfs -text
+videos/videoo.mp4 filter=lfs diff=lfs merge=lfs -text
