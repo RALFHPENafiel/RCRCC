@@ -1,140 +1,530 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>RC Ramos Construction - Project Page CTA</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
+<style>
+    /*---------------------------------------
+  ENHANCED FOOTER STYLES
+----------------------------------------*/
+.footer-section {
+  background: #1a1a1a;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  line-height: 1.6;
+}
 
-        .rcrcc-project-cta {
-            background: linear-gradient(135deg, #ffde2188 0%, #ff7300 50%, #ffde2171 100%);
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
+.footer-top {
+  background: #252525;
+  padding: 40px 0;
+  border-bottom: 1px solid #333;
+}
 
-        .rcrcc-project-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+.footer-cta {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-        .rcrcc-project-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: #ffffff;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-        .rcrcc-project-description {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 40px;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.9);
-        }
+.cta-box {
+  flex: 1;
+  min-width: 250px;
+}
 
-        .rcrcc-project-cta-actions {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+.single-cta {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  padding: 15px;
+  border-radius: 8px;
+}
 
-        .rcrcc-project-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
+.single-cta:hover {
+  background: rgba(255, 140, 0, 0.1);
+  transform: translateY(-5px);
+}
 
-        .rcrcc-project-btn-primary {
-            background-color: #ffffff;
-            color: #FF4500;
-            border: 2px solid #FF4500;
-        }
+.cta-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 140, 0, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
 
-        .rcrcc-project-btn-primary:hover {
-            background-color: #FF4500;
-            color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 25px rgba(0,0,0,0.3);
-        }
+.cta-icon i {
+  color: #FF8C00;
+  font-size: 24px;
+}
 
-        .rcrcc-project-btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
+.cta-text h4 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
 
-        .rcrcc-project-btn-secondary:hover {
-            background-color: rgba(255,255,255,0.1);
-            color: #FF4500;
-            border-color: #FF4500;
-        }
+.cta-text span {
+  color: #b3b3b3;
+  font-size: 14px;
+  display: block;
+  line-height: 1.4;
+}
 
-        .rcrcc-project-btn i {
-            margin-right: 10px;
-        }
+.footer-main {
+  padding: 60px 0 40px;
+}
 
-        @media (max-width: 768px) {
-            .rcrcc-project-title {
-                font-size: 2.2rem;
-            }
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+}
 
-            .rcrcc-project-description {
-                font-size: 1rem;
-            }
+.footer-col {
+  margin-bottom: 30px;
+}
 
-            .rcrcc-project-cta-actions {
-                flex-direction: column;
-                width: 100%;
-            }
+.footer-logo img {
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 20px;
+}
 
-            .rcrcc-project-btn {
-                width: 100%;
-                max-width: 300px;
-                margin: 10px auto;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="rcrcc-project-cta">
-        <div class="rcrcc-project-content">
-            <h1 class="rcrcc-project-title">Your Vision, Our Expertise</h1>
-            <p class="rcrcc-project-description">
-                At RC Ramos Construction, we turn architectural dreams into tangible realities. 
-                Our commitment to innovation, precision, and quality ensures that every project 
-                we undertake becomes a benchmark of excellence.
-            </p>
-            <div class="rcrcc-project-cta-actions">
-                <a href="#consultation" class="rcrcc-project-btn rcrcc-project-btn-primary">
-                    <i class="fas fa-hammer"></i>Start Your Project
-                </a>
-                <a href="#portfolio" class="rcrcc-project-btn rcrcc-project-btn-secondary">
-                    <i class="fas fa-image"></i>Explore Our Portfolio
-                </a>
+.footer-text p {
+  color: #b3b3b3;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.footer-widget h3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-widget h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background: #FF8C00;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li {
+  margin-bottom: 12px;
+}
+
+.footer-menu li a {
+  color: #b3b3b3;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  display: inline-block;
+  position: relative;
+}
+
+.footer-menu li a:hover {
+  color: #FF8C00;
+  transform: translateX(5px);
+}
+
+.footer-menu li a::before {
+  content: '\f054';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 10px;
+  color: #FF8C00;
+  position: absolute;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.footer-menu li a:hover::before {
+  opacity: 1;
+  left: -10px;
+}
+
+.footer-social h5 {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.social-link.facebook { background: #3b5998; }
+.social-link.linkedin { background: #0077b5; }
+.social-link.instagram { 
+  background: #f09433;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+}
+.social-link.youtube { background: #ff0000; }
+
+.social-link:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.subscribe-form {
+  margin-top: 20px;
+  position: relative;
+}
+
+.form-group {
+  position: relative;
+}
+
+.subscribe-form input {
+  width: 100%;
+  padding: 12px 50px 12px 15px;
+  background: #2a2a2a;
+  border: 1px solid #3a3a3a;
+  color: #ffffff;
+  border-radius: 30px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.subscribe-form input:focus {
+  outline: none;
+  border-color: #FF8C00;
+  box-shadow: 0 0 0 2px rgba(255, 140, 0, 0.2);
+}
+
+.subscribe-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: #FF8C00;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subscribe-btn:hover {
+  background: #e67e00;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.footer-payment {
+  margin-top: 25px;
+}
+
+.footer-payment h5 {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.payment-methods {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.payment-img {
+  height: 30px;
+  width: auto;
+  border-radius: 4px;
+  filter: grayscale(100%) brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.payment-img:hover {
+  filter: grayscale(0%) brightness(1);
+}
+
+.footer-bottom {
+  background: #121212;
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.copyright-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.copyright-text p {
+  color: #b3b3b3;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.copyright-text strong {
+  color: #FF8C00;
+  font-weight: 600;
+}
+
+.footer-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-menu ul li a {
+  color: #b3b3b3;
+  font-size: 13px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-menu ul li a:hover {
+  color: #FF8C00;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-about {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .cta-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .cta-box {
+    min-width: 100%;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-about {
+    grid-column: span 1;
+  }
+  
+  .copyright-area {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer-menu ul {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .single-cta {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .cta-icon {
+    margin: 0 auto;
+  }
+  
+  .footer-menu ul {
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+  }
+}
+</style>
+<footer class="footer-section">
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-cta">
+          <div class="cta-row">
+            <div class="cta-box">
+              <div class="single-cta">
+                <div class="cta-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="cta-text">
+                  <h4>Find Us</h4>
+                  <span>123 Construction Avenue, Makati City, Philippines</span>
+                </div>
+              </div>
             </div>
+            <div class="cta-box">
+              <div class="single-cta">
+                <div class="cta-icon">
+                  <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="cta-text">
+                  <h4>Call Us</h4>
+                  <span>+63 2 8123 4567<br>+63 912 345 6789</span>
+                </div>
+              </div>
+            </div>
+            <div class="cta-box">
+              <div class="single-cta">
+                <div class="cta-icon">
+                  <i class="far fa-envelope"></i>
+                </div>
+                <div class="cta-text">
+                  <h4>Email Us</h4>
+                  <span>info@rcramos.com<br>sales@rcramos.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
-</body>
-</html>
+      </div>
+    </div>
+  
+    <div class="footer-main">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-col footer-about">
+            <div class="footer-logo">
+              <img src="../images/logoo.png" alt="RC Ramos Construction Logo" class="logo-img">
+            </div>
+            <div class="footer-text">
+              <p>RC Ramos Construction Corporation has been delivering exceptional construction services since 1985, specializing in commercial, residential, and industrial projects across the Philippines.</p>
+            </div>
+            <div class="footer-social">
+              <h5>Follow Our Progress</h5>
+              <div class="social-links">
+                <a href="#" class="social-link facebook" aria-label="Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link linkedin" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link instagram" aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link youtube" aria-label="YouTube">
+                  <i class="fab fa-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+  
+          <div class="footer-col footer-links">
+            <div class="footer-widget">
+              <h3>Quick Links</h3>
+              <ul class="footer-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="footer-col footer-services">
+            <div class="footer-widget">
+              <h3>Our Services</h3>
+              <ul class="footer-menu">
+                <li><a href="#">Commercial Construction</a></li>
+                <li><a href="#">Residential Building</a></li>
+                <li><a href="#">Industrial Facilities</a></li>
+                <li><a href="#">Renovation</a></li>
+                <li><a href="#">Project Management</a></li>
+                <li><a href="#">Consulting</a></li>
+              </ul>
+            </div>
+          </div>
+  
+          <div class="footer-col footer-newsletter">
+            <div class="footer-widget">
+              <h3>Stay Updated</h3>
+              <div class="footer-text">
+                <p>Subscribe to our newsletter for project updates and construction insights.</p>
+              </div>
+              <div class="subscribe-form">
+                <form action="#" method="post">
+                  <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Your Email Address" required>
+                    <button type="submit" class="subscribe-btn">
+                      <i class="fas fa-paper-plane"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="footer-payment">
+                <h5>We Accept</h5>
+                <div class="payment-methods">
+                  <img src="https://via.placeholder.com/50x30" alt="Visa" class="payment-img">
+                  <img src="https://via.placeholder.com/50x30" alt="Mastercard" class="payment-img">
+                  <img src="https://via.placeholder.com/50x30" alt="PayPal" class="payment-img">
+                  <img src="https://via.placeholder.com/50x30" alt="Bank Transfer" class="payment-img">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="copyright-area">
+          <div class="copyright-text">
+            <p>&copy; 2024 <strong>RC Ramos Construction Corporation</strong>. All Rights Reserved.</p>
+          </div>
+          <div class="footer-menu">
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="#">Sitemap</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>

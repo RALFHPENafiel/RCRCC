@@ -3,32 +3,817 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RC Ramos Construction - Projects</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Slab:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>About Us - R.C. Ramos Construction Corporation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Enhanced Color Palette */
         :root {
-            --color-primary: #0d47a1;
-            --color-secondary: #1976d2;
-            --color-accent: #2196f3;
-            --color-text-dark: #212121;
-            --color-text-light: #ffffff;
-            --color-background: #f5f5f5;
-            --color-muted: #757575;
-            
-            --gradient-primary: linear-gradient(135deg, #0d47a1 0%, #1976d2 100%);
-            --gradient-secondary: linear-gradient(135deg, #2196f3 0%, #64b5f6 100%);
-            
-            --shadow-subtle: 0 4px 6px rgba(0,0,0,0.06);
-            --shadow-medium: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-large: 0 15px 40px rgba(0,0,0,0.12);
+            --primary: #FF6B00;  /* Brand orange */
+            --primary-light: rgba(255, 107, 0, 0.1);
+            --secondary: #FFC107; /* Accent yellow */
+            --secondary-light: rgba(255, 193, 7, 0.1);
+            --dark: #212121;     /* Dark text */
+            --darker: #121212;   /* Dark backgrounds */
+            --light: #FFFFFF;    /* White background */
+            --lighter: #FAFAFA;  /* Light background */
+            --gray: #757575;     /* Secondary text */
+            --light-gray: #EEEEEE; /* Light gray */
+            --border: #E0E0E0;  /* Borders */
         }
 
+        /* Modern Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 0;
+        }
+
+        .section-sm {
+            padding: 60px 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 { 
+            font-size: 3.5rem;
+            line-height: 1.1;
+        }
+        
+        h2 { 
+            font-size: 2.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        h3 { 
+            font-size: 1.8rem;
+            letter-spacing: -0.3px;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-primary {
+            color: var(--primary);
+        }
+
+        .text-secondary {
+            color: var(--secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            background: var(--primary);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+        }
+
+        .btn:hover {
+            background: #E05E00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: #E6B000;
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+        }
+
+        .btn i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn:hover i {
+            transform: translateX(4px);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        /* Hero Section - Modern */
+        .hero {
+            height: 90vh;
+            min-height: 700px;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 100%), 
+                        url('/images/rc-rcc.JPG') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero .btn {
+            animation: fadeInUp 1s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        /* Stats Counter - Modern */
+        .stats {
+            background: var(--darker);
+            color: var(--light);
+            padding: 100px 0;
+            margin-top: -80px;
+            position: relative;
+            z-index: 2;
+            clip-path: polygon(0 80px, 100% 0, 100% 100%, 0% 100%);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* Values Section - Enhanced */
+        .values {
+            padding: 100px 0;
+            background: var(--lighter);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background: var(--light);
+            padding: 40px 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--primary);
+            transition: height 0.4s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .value-card:hover:before {
+            height: 100%;
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        .value-card h3 {
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .value-card h3:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--primary-light);
+            transition: width 0.3s ease;
+        }
+
+        .value-card:hover h3:after {
+            width: 80px;
+        }
+
+        /* Leadership Section - Enhanced */
+        .leadership {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .leader-card {
+            text-align: center;
+            background: var(--lighter);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .leader-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .leader-card:hover .leader-image {
+            transform: scale(1.05);
+        }
+        
+        .leader-info {
+            padding: 30px;
+            position: relative;
+        }
+        
+        .leader-info h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .leader-title {
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .leader-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .leader-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .leader-social a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Company History Section - Enhanced */
+        .company-history {
+            padding: 100px 0;
+            background: var(--lighter);
+        }
+
+        .history-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .history-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .history-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .history-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .history-badge {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.3);
+            z-index: 2;
+        }
+
+        .history-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .history-content h2 {
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .history-content h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .history-btn {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        /* Timeline Section - Enhanced */
+        .timeline {
+            padding: 100px 0;
+            background: var(--light);
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--primary-light);
+            z-index: 1;
+        }
+        
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            z-index: 2;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 30px 0 30px 80px;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(even) {
+            padding: 30px 80px 30px 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-year {
+            left: auto;
+            right: 0;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            left: 0;
+            top: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            z-index: 3;
+            box-shadow: 0 5px 15px rgba(255, 107, 0, 0.3);
+        }
+        
+        .timeline-content {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .timeline-content:before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            transform: rotate(45deg);
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content:before {
+            left: auto;
+            right: -10px;
+            border-left: none;
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* Certifications Section - Enhanced */
+        .certifications {
+            padding: 100px 0;
+            background: var(--lighter);
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .cert-item {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--light);
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .cert-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background: white;
+        }
+        
+        .cert-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2.5rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover .cert-icon {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Testimonials Section - Enhanced */
+        .testimonials {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .testimonial-card {
+            background: var(--lighter);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 30px;
+            position: relative;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark);
+        }
+        
+        .testimonial-text:before {
+            content: '"';
+            font-size: 5rem;
+            color: rgba(255,107,0,0.1);
+            position: absolute;
+            top: -30px;
+            left: -20px;
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-author {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-author:before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+            margin-right: 15px;
+        }
+        
+        .testimonial-company {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .testimonial-rating {
+            color: var(--secondary);
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* CTA Section - Enhanced */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, rgba(33, 33, 33, 0.95) 0%, rgba(33, 33, 33, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .cta-section:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, rgba(255,107,0,0.7) 100%);
+            opacity: 0.7;
+            z-index: 1;
+        }
+        
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-content h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2.8rem;
+        }
+        
+        .cta-content p {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-section .btn {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .cta-section .btn-outline {
+            color: white;
+            border-color: white;
+        }
+
+        .cta-section .btn-outline:hover {
+            background: white;
+            color: var(--dark);
+        }
+        
+        /* Animations */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -40,537 +825,629 @@
             }
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--color-text-dark);
-            background-color: var(--color-background);
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.2rem; }
+            
+            .hero {
+                height: 80vh;
+                min-height: 600px;
+            }
         }
 
-        .projects-header {
-            background: var(--gradient-primary);
-            color: var(--color-text-light);
-            text-align: center;
-            padding: 4rem 1rem;
-            margin-bottom: 3rem;
-        }
+        @media (max-width: 992px) {
+            .container {
+                padding: 70px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
 
-        .projects-header h1 {
-            font-family: 'Roboto Slab', serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
+            .timeline:before {
+                left: 30px;
+            }
 
-        .projects-header p {
-            max-width: 800px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.9);
-        }
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding: 30px 0 30px 80px;
+                text-align: left;
+            }
 
-        .wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+            .timeline-item:nth-child(even) .timeline-year {
+                left: 0;
+                right: auto;
+            }
 
-        .projects-section {
-            margin-bottom: 4rem;
-        }
+            .timeline-item:nth-child(even) .timeline-content:before {
+                left: -10px;
+                right: auto;
+                border-right: none;
+                border-left: 1px solid var(--border);
+            }
 
-        .section-title {
-            text-align: center;
-            font-family: 'Roboto Slab', serif;
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            position: relative;
-            color: var(--color-primary);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--color-accent);
-        }
-
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
-        }
-
-        .carousel {
-            display: flex;
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-
-        .carousel-item {
-            flex: 0 0 100%;
-            display: flex;
-            opacity: 0;
-            visibility: hidden;
-            position: absolute;
-            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
-            transform: scale(0.95);
-        }
-
-        .carousel-item.active {
-            opacity: 1;
-            visibility: visible;
-            position: relative;
-            transform: scale(1);
-        }
-
-        .carousel-item__content {
-            display: flex;
-            align-items: stretch;
-            width: 100%;
-            background-color: var(--color-text-light);
-            box-shadow: var(--shadow-large);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .carousel-item__image {
-            flex: 1.2;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .carousel-item__info {
-            flex: 1;
-            padding: 3rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background-color: #f9f9f9;
-        }
-
-        .project-tag {
-            display: inline-block;
-            padding: 6px 12px;
-            background-color: var(--color-accent);
-            color: var(--color-text-light);
-            font-size: 0.75rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .carousel-item__title {
-            font-family: 'Roboto Slab', serif;
-            font-size: 2.25rem;
-            margin-bottom: 1.5rem;
-            color: var(--color-primary);
-            line-height: 1.2;
-        }
-
-        .carousel-item__description {
-            color: var(--color-muted);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .project-details {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            border-top: 1px solid #e0e0e0;
-            padding-top: 1.5rem;
-        }
-
-        .project-detail {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-detail-label {
-            font-size: 0.875rem;
-            color: var(--color-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .project-detail-value {
-            font-weight: 600;
-            color: var(--color-primary);
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .carousel-control {
-            width: 12px;
-            height: 12px;
-            background-color: var(--color-muted);
-            border-radius: 50%;
-            margin: 0 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .carousel-control.active {
-            background-color: var(--color-primary);
-            width: 24px;
-            border-radius: 20px;
-        }
-
-        .carousel__nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            z-index: 10;
-            pointer-events: none;
-        }
-
-        .carousel__arrow {
-            background-color: rgba(255,255,255,0.9);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border-radius: 50%;
-            box-shadow: var(--shadow-medium);
-            transition: all 0.3s ease;
-            pointer-events: auto;
-        }
-
-        .carousel__arrow:hover {
-            background-color: var(--color-primary);
-            color: var(--color-text-light);
-        }
-
-        .carousel__icon {
-            width: 24px;
-            height: 24px;
-            stroke: var(--color-primary);
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .carousel__arrow:hover .carousel__icon {
-            stroke: var(--color-text-light);
-        }
-
-        @media (max-width: 1024px) {
-            .carousel-item__content {
+            .story-card, .story-card.reverse {
                 flex-direction: column;
             }
+            
+            .story-image, .story-content {
+                min-width: 100%;
+            }
+            
+            .story-stats, .modern-stats {
+                flex-wrap: wrap;
+            }
+        }
 
-            .carousel-item__image,
-            .carousel-item__info {
-                flex: 1;
-                width: 100%;
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 0;
+                width: 95%;
+            }
+            
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+            
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                margin-bottom: 40px;
+            }
+            
+            .stats {
+                margin-top: -60px;
+                padding: 80px 0;
+                clip-path: polygon(0 60px, 100% 0, 100% 100%, 0% 100%);
             }
 
-            .carousel-item__image {
+            .leader-image {
                 height: 300px;
             }
 
-            .projects-header h1 {
+            .cert-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 20px;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .history-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 50px 0;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .hero {
+                height: 85vh;
+                min-height: 500px;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .stat-item {
+                padding: 20px;
+            }
+
+            .stat-number {
                 font-size: 2.5rem;
             }
 
-            .section-title {
-                font-size: 2.5rem;
+            .leader-image {
+                height: 250px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                padding: 30px 0 30px 60px;
+            }
+
+            .timeline-year {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .story-content h3 {
+                font-size: 1.6rem;
+            }
+            
+            .year-badge {
+                top: 10px;
+                left: 10px;
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .leader-card {
+                min-width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <div class="projects-header">
-        <div class="wrapper">
-            <h1>Our Construction Projects</h1>
-            <p>
-                At RC Ramos Construction, we transform architectural visions into reality. Our portfolio showcases a diverse range of projects that demonstrate our commitment to excellence, innovation, and sustainable design.
-            </p>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Building The Future With Excellence</h1>
+            <p>R.C. Ramos Construction Corporation has been shaping skylines and communities across the Philippines with integrity and innovation since 1995</p>
+            <a href="#about" class="btn">Discover Our Story <i class="fas fa-arrow-down"></i></a>
         </div>
-    </div>
+    </section>
 
-    <div class="wrapper">
-        <!-- Signature Projects Section -->
-        <section class="projects-section signature-projects">
-            <h2 class="section-title">Signature Projects</h2>
-            <div class="carousel-container signature-projects-carousel">
-                <div class="carousel">
-                    <div class="carousel__nav">
-                        <span class="signature-moveLeft carousel__arrow" role="button" aria-label="Previous Signature Project">
-                            <svg class="carousel__icon" viewBox="0 0 24 24">
-                                <polyline points="15 18 9 12 15 6"/>
-                            </svg>
-                        </span>
-                        <span class="signature-moveRight carousel__arrow" role="button" aria-label="Next Signature Project">
-                            <svg class="carousel__icon" viewBox="0 0 24 24">
-                                <polyline points="9 18 15 12 9 6"/>
-                            </svg>
-                        </span>
-                    </div>
-
-                    <div class="carousel-item active">
-                        <div class="carousel-item__content">
-                            <div 
-                                class="carousel-item__image" 
-                                style="background-image: url('/images/4-img.png')"
-                                aria-label="Metropolitan Tower Project"
-                            ></div>
-                            <div class="carousel-item__info">
-                                <span class="project-tag">Signature Project</span>
-                                <h3 class="carousel-item__title">Metropolitan Tower</h3>
-                                <p class="carousel-item__description">
-                                    An iconic skyscraper that redefines urban architecture, integrating sustainable design principles with cutting-edge engineering to create a landmark in the city's skyline.
-                                </p>
-                                <div class="project-details">
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Location</span>
-                                        <span class="project-detail-value">Downtown Metro</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Completion</span>
-                                        <span class="project-detail-value">2022</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Scale</span>
-                                        <span class="project-detail-value">45 Floors</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="carousel-item__content">
-                            <div
-                                class="carousel-item__image"
-                                style="background-image: url('/images/2_img.png')"
-                            ></div>
-                            <div class="carousel-item__info">
-                                <span class="project-tag">Signature Project</span>
-                                <h3 class="carousel-item__title">Riverside Complex</h3>
-                                <p class="carousel-item__description">
-                                    A transformative mixed-use development that seamlessly blends residential, commercial, and recreational spaces, creating a vibrant urban ecosystem along the riverfront.
-                                </p>
-                                <div class="project-details">
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Location</span>
-                                        <span class="project-detail-value">Riverfront District</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Completion</span>
-                                        <span class="project-detail-value">2021</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Scale</span>
-                                        <span class="project-detail-value">3 Buildings</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="carousel-item__content">
-                            <div
-                                class="carousel-item__image"
-                                style="background-image: url('/images/img-1.jpg')"
-                            ></div>
-                            <div class="carousel-item__info">
-                                <span class="project-tag">Signature Project</span>
-                                <h3 class="carousel-item__title">Urban Innovation Center</h3>
-                                <p class="carousel-item__description">
-                                    A state-of-the-art facility designed to foster technological innovation, combining sustainable architecture with advanced infrastructure for modern businesses and research institutions.
-                                </p>
-                                <div class="project-details">
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Location</span>
-                                        <span class="project-detail-value">Tech Hub</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Completion</span>
-                                        <span class="project-detail-value">2023</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Scale</span>
-                                        <span class="project-detail-value">25,000 m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Stats Counter -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="28">0</div>
+                    <div class="stat-label">Years of Experience</div>
                 </div>
-                <div class="carousel-controls">
-                    <div class="carousel-control active" data-index="0"></div>
-                    <div class="carousel-control" data-index="1"></div>
-                    <div class="carousel-control" data-index="2"></div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="500">0</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="50">0</div>
+                    <div class="stat-label">Professional Team</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="100">0</div>
+                    <div class="stat-label">Satisfied Clients</div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Ongoing Projects Section -->
-        <section class="projects-section ongoing-projects">
-            <h2 class="section-title">Ongoing Projects</h2>
-            <div class="carousel-container ongoing-projects-carousel">
-                <div class="carousel">
-                    <div class="carousel__nav">
-                        <span class="ongoing-moveLeft carousel__arrow" role="button" aria-label="Previous Ongoing Project">
-                            <svg class="carousel__icon" viewBox="0 0 24 24">
-                                <polyline points="15 18 9 12 15 6"/>
-                            </svg>
-                        </span>
-                        <span class="ongoing-moveRight carousel__arrow" role="button" aria-label="Next Ongoing Project">
-                            <svg class="carousel__icon" viewBox="0 0 24 24">
-                                <polyline points="9 18 15 12 9 6"/>
-                            </svg>
-                        </span>
-                    </div>
-
-                    <div class="carousel-item active">
-                        <div class="carousel-item__content">
-                            <div
-                                class="carousel-item__image"
-                                style="background-image: url('/images/on-going.jpg')"
-                            ></div>
-                            <div class="carousel-item__info">
-                                <span class="project-tag">Ongoing Project</span>
-                                <h3 class="carousel-item__title">Green Campus Development</h3>
-                                <p class="carousel-item__description">
-                                    An innovative educational complex designed to set new standards in sustainable campus architecture, integrating renewable energy, green spaces, and advanced learning environments.
-                                </p>
-                                <div class="project-details">
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Location</span>
-                                        <span class="project-detail-value">University District</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Expected Completion</span>
-                                        <span class="project-detail-value">2025</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Scale</span>
-                                        <span class="project-detail-value">40,000 m²</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="carousel-item">
-                        <div class="carousel-item__content">
-                            <div
-                                class="carousel-item__image"
-                                style="background-image: url('/images/ongoing.jpg')"
-                            ></div>
-                            <div class="carousel-item__info">
-                                <span class="project-tag">Ongoing Project</span>
-                                <h3 class="carousel-item__title">Urban Renewal Hub</h3>
-                                <p class="carousel-item__description">
-                                    A comprehensive urban redevelopment initiative transforming a historic district with modern infrastructure, community-centric spaces, and architectural preservation.
-                                </p>
-                                <div class="project-details">
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Location</span>
-                                        <span class="project-detail-value">Historic District</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Expected Completion</span>
-                                        <span class="project-detail-value">2024</span>
-                                    </div>
-                                    <div class="project-detail">
-                                        <span class="project-detail-label">Scale</span>
-                                        <span class="project-detail-value">5 City Blocks</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Company History Section -->
+    <section id="history" class="company-history">
+        <div class="container">
+            <div class="history-container">
+                <div class="history-image">
+                    <span class="history-badge">Our Story</span>
+                    <img src="images/banner.JPG" alt="R.C. Ramos Construction History">
                 </div>
-                <div class="carousel-controls">
-                    <div class="carousel-control active" data-index="0"></div>
-                    <div class="carousel-control" data-index="1"></div>
+                <div class="history-content">
+                    <h2>The <span class="text-primary">R.C. Ramos</span> Story</h2>
+                    <p>Founded in 1995 by Engr. Rodrigo C. Ramos, R.C. Ramos Construction began as a small family business with big dreams. What started as a modest operation with just a handful of employees has grown into one of the most respected construction firms in the Philippines.</p>
+                    <p>Our journey has been marked by steady growth, strategic expansion, and an unwavering commitment to quality. From our first residential project to the large-scale commercial developments we undertake today, every milestone has been built on a foundation of integrity and craftsmanship.</p>
+                    <p>Through economic challenges and industry changes, we've remained true to our core values while continuously innovating to meet the evolving needs of our clients and the construction industry.</p>
+                    <div class="history-btn">
+                        <a href="#timeline" class="btn-secondary" id="view-timeline-btn">View Our Timeline <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our <span class="text-primary">Core</span> Values</h2>
+                <p>The foundation of everything we do at R.C. Ramos Construction</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <h3>Uncompromising Quality</h3>
+                    <p>We never cut corners, using only premium materials and employing skilled craftsmen to ensure every project meets our exacting standards.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Safety First</h3>
+                    <p>Our rigorous safety protocols protect both our team and your investment throughout every phase of construction.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Integrity Always</h3>
+                    <p>We build trust through complete transparency, honest communication, and ethical business practices in all our relationships.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation Driven</h3>
+                    <p>We continuously embrace modern technologies, sustainable practices, and creative solutions to deliver better results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Leadership Section -->
+    <section class="leadership">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our <span class="text-primary">Leadership</span> Team</h2>
+                <p>The visionaries and experts guiding R.C. Ramos Construction</p>
+            </div>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <img src="/images/RCR.png" alt="Rodrigo C. Ramos" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Engr. Rodrigo C. Ramos</h3>
+                        <p class="leader-title">Founder & Chairman</p>
+                        <p>With over 40 years in construction, Mr. Ramos established the company's reputation for quality and reliability that continues today.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="/images/DRR.png" alt="Engr. Damian R. Ramos" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Engr. Damian R. Ramos</h3>
+                        <p class="leader-title">Founder & Chairman</p>
+                        <p>A licensed civil engineer who has led the company's modernization and strategic expansion since taking leadership in 2005.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="/images/SCR.png" alt="Management Team" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Mrs. Susan C. Ramos</h3>
+                        <p class="leader-title">Founder & Chairman.</p>
+                        <p>Our leadership team combines decades of hands-on construction expertise with innovative management practices.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-users"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="leadership-grid">
+                <div class="leader-card">
+                    <img src="/images/SCR 2.png" alt="Rodrigo C. Ramos" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Mrs. Sophia R. Ramos</h3>
+                        <p class="leader-title">Founder & Chairman</p>
+                        <p>With over 40 years in construction, Mr. Ramos established the company's reputation for quality and reliability that continues today.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="/images/night.jpg" alt="Engr. Damian R. Ramos" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Peanut Butter</h3>
+                        <p class="leader-title">Founder of Peanut Butter</p>
+                        <p>A licensed civil engineer who has led the company's modernization and strategic expansion since taking leadership in 2005.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="leader-card">
+                    <img src="/images/IMG_-3-.JPG" alt="Management Team" class="leader-image">
+                    <div class="leader-info">
+                        <h3>Peanut Butter</h3>
+                        <p class="leader-title">Founder of Peanut Butter</p>
+                        <p>Our leadership team combines decades of hands-on construction expertise with innovative management practices.</p>
+                        <div class="leader-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fas fa-users"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Company Timeline Section -->
+    <section id="timeline" class="timeline">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our <span class="text-primary">Journey</span> Through Time</h2>
+                <p>Key milestones in our company's history and growth</p>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-item">
+                    <div class="timeline-year">1995</div>
+                    <div class="timeline-content">
+                        <h3>Humble Beginnings</h3>
+                        <p>R.C. Ramos Construction was established as a small general contracting firm in Metro Manila, taking on residential and small commercial projects.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2002</div>
+                    <div class="timeline-content">
+                        <h3>First Major Project</h3>
+                        <p>Completed our first large-scale commercial project, the 10-story Ramos Tower in Makati, marking our entry into high-rise construction.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2008</div>
+                    <div class="timeline-content">
+                        <h3>Triple "A" Accreditation</h3>
+                        <p>Awarded prestigious PCAB accreditation, recognizing our capabilities to undertake major construction projects nationwide.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2015</div>
+                    <div class="timeline-content">
+                        <h3>Regional Expansion</h3>
+                        <p>Opened our Cebu regional office to serve growing demand in the Visayas region, completing our first project outside Luzon.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2023</div>
+                    <div class="timeline-content">
+                        <h3>Green Construction</h3>
+                        <p>Launched our sustainable building division to meet growing demand for eco-friendly, energy-efficient construction solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Certifications Section -->
+    <section class="certifications">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our <span class="text-primary">Accreditations</span></h2>
+                <p>Recognized by the industry's most prestigious certifications</p>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>PCAB Triple "A"</h3>
+                    <p>Philippine Contractors Accreditation Board</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3>ISO 9001:2015</h3>
+                    <p>Quality Management System</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>DOLE Certified</h3>
+                    <p>Occupational Safety & Health</p>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Green Mark</h3>
+                    <p>Sustainable Construction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our <span class="text-primary">Clients</span> Say</h2>
+                <p>Hear from those who've experienced the R.C. Ramos difference</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>R.C. Ramos Construction delivered our corporate headquarters ahead of schedule while maintaining impeccable quality standards. Their team was professional and communicative throughout the process, making what could have been a stressful experience remarkably smooth.</p>
+                    </div>
+                    <div class="testimonial-author">Maria Santos</div>
+                    <div class="testimonial-company">Santos Holdings Corporation</div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>We've worked with many contractors over the years, but R.C. Ramos stands out for their attention to detail and problem-solving abilities. They turned our challenging hillside residential project into a showpiece, overcoming complex engineering challenges with innovative solutions.</p>
+                    </div>
+                    <div class="testimonial-author">Robert Lim</div>
+                    <div class="testimonial-company">Lim Family Residence</div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>As a developer, we need contractors we can trust to represent our brand well. R.C. Ramos has been our go-to partner for three major mixed-use developments because they consistently deliver excellence. Their ability to maintain quality while meeting aggressive timelines is unmatched.</p>
+                    </div>
+                    <div class="testimonial-author">Andrea Torres</div>
+                    <div class="testimonial-company">Torres Development Group</div>
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Build Your Vision?</h2>
+                <p>With nearly three decades of experience, R.C. Ramos Construction has the expertise to bring your project to life with quality craftsmanship and professional service. Let's discuss how we can help make your construction goals a reality.</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="btn">Get a Free Consultation <i class="fas fa-arrow-right"></i></a>
+                    <a href="tel:+6321234567" class="btn-outline">Call Us Now <i class="fas fa-phone"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        function initializeCarousel(
-            carouselClass,
-            moveLeftClass,
-            moveRightClass,
-            controlsClass
-        ) {
-            const carouselContainer = document.querySelector(carouselClass);
-            const carousel = carouselContainer.querySelector(".carousel");
-            const carouselItems = carousel.querySelectorAll(".carousel-item");
-            const moveLeft = carouselContainer.querySelector(moveLeftClass);
-            const moveRight = carouselContainer.querySelector(moveRightClass);
-            const carouselControls = carouselContainer.querySelectorAll(".carousel-control");
-            const total = carouselItems.length;
-            let current = 0;
-
-            function setSlide(prev, next) {
-                carouselItems[prev].classList.remove("active");
-                carouselControls[prev].classList.remove("active");
-
-                if (next > total - 1) next = 0;
-                if (next < 0) next = total - 1;
-
-                carouselItems[next].classList.add("active");
-                carouselControls[next].classList.add("active");
-                current = next;
-            }
-
-            moveRight.addEventListener("click", function () {
-                const prev = current;
-                const next = current + 1;
-                setSlide(prev, next);
+        // Enhanced smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
 
-            moveLeft.addEventListener("click", function () {
-                const prev = current;
-                const next = current - 1;
-                setSlide(prev, next);
-            });
-
-            carouselControls.forEach(control => {
-                control.addEventListener("click", function() {
-                    const index = parseInt(this.getAttribute("data-index"));
-                    setSlide(current, index);
+        // Animated counter for stats with improved performance
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            let animated = false;
+            
+            function startCounters() {
+                if (animated) return;
+                
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-count');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    const updateCount = () => {
+                        const currentCount = +counter.innerText;
+                        if (currentCount < target) {
+                            counter.innerText = Math.ceil(currentCount + increment);
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    
+                    updateCount();
                 });
-            });
+                
+                animated = true;
+            }
+            
+            // Intersection Observer for better performance
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            observer.observe(document.querySelector('.stats'));
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            initializeCarousel(
-                ".signature-projects-carousel",
-                ".signature-moveLeft",
-                ".signature-moveRight",
-                ".signature-projects-carousel .carousel-control"
-            );
-            initializeCarousel(
-                ".ongoing-projects-carousel",
-                ".ongoing-moveLeft",
-                ".ongoing-moveRight",
-                ".ongoing-projects-carousel .carousel-control"
-            );
+        // Initialize animations when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            animateCounters();
+            
+            // Show timeline section when button is clicked
+            const viewTimelineBtn = document.getElementById('view-timeline-btn');
+            const timelineSection = document.querySelector('.timeline');
+            
+            if (viewTimelineBtn && timelineSection) {
+                viewTimelineBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    timelineSection.style.display = 'block';
+                    
+                    // Animate timeline items
+                    const timelineItems = document.querySelectorAll('.timeline-item');
+                    timelineItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('show');
+                        }, index * 200);
+                    });
+                    
+                    // Scroll to timeline section
+                    window.scrollTo({
+                        top: timelineSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            // Add animation to timeline items when scrolled into view
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const timelineObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('show');
+                        }, index * 200);
+                        timelineObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            timelineItems.forEach(item => {
+                timelineObserver.observe(item);
+            });
         });
     </script>
 </body>
