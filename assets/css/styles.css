@@ -1,0 +1,22 @@
+#wrapper {
+    display: flex;
+}
+
+#sidebar-wrapper {
+    min-width: 250px;
+    max-width: 250px;
+    height: 100vh;
+}
+
+#page-content-wrapper {
+    flex-grow: 1;
+}
+
+.toggled #sidebar-wrapper {
+    margin-left: -250px;
+}
+
+.card {
+    text-align: center;
+    padding: 20px;
+}

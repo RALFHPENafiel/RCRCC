@@ -4264,182 +4264,6 @@ section {
   }
 }
 
-/*---------------------------------------
-  FOOTER SECTION
-----------------------------------------*/
-.footer-section {
-  background: #151414;
-  color: #fff;
-}
-.footer-cta {
-  border-bottom: 1px solid #373636;
-  padding: 50px 0;
-}
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 -15px;
-}
-.col-xl-4 {
-  width: 33.33%;
-  padding: 0 15px;
-}
-.single-cta {
-  display: flex;
-  align-items: center;
-}
-.single-cta i {
-  color: #ff5e14; /* Orange accent */
-  font-size: 40px;
-  margin-right: 20px;
-}
-.cta-text h4 {
-  color: #fff;
-  font-size: 20px;
-  margin-bottom: 5px;
-}
-.cta-text span {
-  color: #757575;
-  font-size: 15px;
-}
-.footer-content {
-  padding: 50px 0;
-}
-.footer-widget {
-  margin-bottom: 30px;
-}
-.footer-logo img {
-  max-width: 200px;
-  margin-bottom: 20px;
-}
-.footer-text p {
-  color: #7e7e7e;
-  line-height: 1.6;
-  margin-bottom: 15px;
-}
-.footer-social-icon {
-  margin-top: 20px;
-}
-.footer-social-icon span {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-.footer-social-icon a {
-  color: #fff;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  border-radius: 50%;
-  margin-right: 10px;
-  display: inline-block;
-  transition: background 0.3s ease;
-}
-.facebook-bg { background: #3B5998; }
-.twitter-bg { background: #833ab4;
-  background: linear-gradient(
-    to right,
-    #833ab4,#fd1d1d,#fcb045
-  ); }
-.google-bg { background: #DD4B39; }
-.footer-social-icon a:hover {
-  opacity: 0.8;
-}
-.footer-widget-heading h3 {
-  color: #fff;
-  position: relative;
-  padding-bottom: 15px;
-  margin-bottom: 20px;
-}
-.footer-widget-heading h3::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 3px;
-  width: 50px;
-  background: #ff5e14; /* Orange accent */
-}
-.footer-widget ul {
-  list-style: none;
-}
-.footer-widget ul li {
-  margin-bottom: 10px;
-}
-.footer-widget ul li a {
-  color: #878787;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.footer-widget ul li a:hover {
-  color: #ff5e14; /* Orange accent */
-}
-.subscribe-form {
-  position: relative;
-}
-.subscribe-form input {
-  width: 100%;
-  padding: 15px;
-  background: #2E2E2E;
-  border: 1px solid #2E2E2E;
-  color: #fff;
-}
-.subscribe-form button {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: #ff5e14; /* Orange accent */
-  color: #fff;
-  border: none;
-  padding: 15px 20px;
-  cursor: pointer;
-}
-.copyright-area {
-  background: #202020;
-  padding: 20px 0;
-  text-align: center;
-}
-.copyright-text p {
-  color: #878787;
-  margin: 0;
-}
-.copyright-text a {
-  color: #ff5e14; /* Orange accent */
-  text-decoration: none;
-}
-.footer-menu {
-  margin-top: 10px;
-}
-.footer-menu ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-}
-.footer-menu ul li {
-  margin: 0 10px;
-}
-.footer-menu ul li a {
-  color: #878787;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.footer-menu ul li a:hover {
-  color: #ff5e14; /* Orange accent */
-}
-@media (max-width: 768px) {
-  .col-xl-4 {
-      width: 100%;
-      margin-bottom: 30px;
-  }
-}
-
-
-
-
-
-
-
 
 
 
@@ -4517,31 +4341,31 @@ section {
 }
 
 .recruitment-image:nth-child(1) {
-  background-image: url('/images/1-img.png');
+  background-image: url('../../images/1-img.png');
 }
 
 .recruitment-image:nth-child(2) {
-  background-image: url('/images/2-img.png');
+  background-image: url('../../images/2-img.png');
 }
 
 .recruitment-image:nth-child(3) {
-  background-image: url('/images/3-img.png');
+  background-image: url('../../images/3-img.png');
 }
 
 .recruitment-image:nth-child(4) {
-  background-image: url('/images/1_img.png');
+  background-image: url('../../images/1_img.png');
 }
 
 .recruitment-image:nth-child(5) {
-  background-image: url('/images/join.jpg');
+  background-image: url('../../images/join.jpg');
 }
 
 .recruitment-image:nth-child(6) {
-  background-image: url('/images/architect.jpg');
+  background-image: url('../../images/architect.jpg');
 }
 
 .recruitment-image:nth-child(7) {
-  background-image: url('/images/company-p.jpg');
+  background-image: url('../../images/company-p.jpg');
 }
 
 @media (max-width: 1024px) {

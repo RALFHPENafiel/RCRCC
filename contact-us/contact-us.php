@@ -1,43 +1,227 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | RC RAMOS Construction Corporation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/contact-us.css">
-</head>
-<body>
-    <!-- Header -->
-    <header id="main-header">
-        <div class="container">
-            <nav class="navbar">
-                <a href="/" class="logo" aria-label="RC RAMOS Home">
-                    <img src="/images/logo-1.png" alt="RC RAMOS Logo" class="logo-image">
-                </a>
+<?php
+// Database configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', '');
+define('DB_NAME', 'cms_db');
 
-                <ul class="nav-menu" id="nav-menu">
-                    <li class="nav-item">
-                        <a href="index.html" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="about.html" class="nav-link">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="services.html" class="nav-link">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="projects.html" class="nav-link">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="contact.html" class="nav-link active">Contact Us</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+// File upload configuration
+define('UPLOAD_DIR', __DIR__ . '/uploads/quote_requests/');
+define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10MB
+$allowedFileTypes = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'];
 
+// Email configuration
+define('ADMIN_EMAIL', 'hr@yourcompany.com');
+define('FROM_EMAIL', 'noreply@yourcompany.com');
+define('FROM_NAME', 'Construction Company');
+
+// Initialize variables
+$errors = [];
+$success = false;
+$formData = [];
+
+// Generate CSRF token
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Verify CSRF token
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        $errors[] = 'Invalid CSRF token. Please try again.';
+    } else {
+        // Sanitize and validate input
+        $formData = [
+            'name' => filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
+            'email' => filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL),
+            'phone' => filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING),
+            'project-type' => filter_input(INPUT_POST, 'project-type', FILTER_SANITIZE_STRING),
+            'budget' => filter_input(INPUT_POST, 'budget', FILTER_SANITIZE_STRING),
+            'timeline' => filter_input(INPUT_POST, 'timeline', FILTER_SANITIZE_STRING),
+            'message' => filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING)
+        ];
+
+        // Validate inputs
+        if (empty($formData['name'])) $errors[] = 'Full name is required';
+        if (empty($formData['email']) || !filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Valid email address is required';
+        }
+        if (empty($formData['phone'])) {
+            $errors[] = 'Phone number is required';
+        } else {
+            // Enhanced phone number validation with country code
+            if (!preg_match('/^\+?\d{8,15}$/', $formData['phone'])) {
+                $errors[] = 'Please enter a valid phone number with country code (e.g., +639123456789)';
+            }
+        }
+        if (empty($formData['project-type'])) $errors[] = 'Project type is required';
+        if (empty($formData['budget'])) $errors[] = 'Budget range is required';
+        if (empty($formData['timeline'])) $errors[] = 'Project timeline is required';
+        if (empty($formData['message'])) $errors[] = 'Project details are required';
+
+        // Process file uploads if no errors
+        $uploadedFiles = [];
+        if (empty($errors) && !empty($_FILES['files']['name'][0])) {
+            if (!is_dir(UPLOAD_DIR)) {
+                mkdir(UPLOAD_DIR, 0755, true);
+            }
+
+            foreach ($_FILES['files']['tmp_name'] as $key => $tmpName) {
+                if ($_FILES['files']['error'][$key] === UPLOAD_ERR_OK) {
+                    // Validate file
+                    $fileSize = $_FILES['files']['size'][$key];
+                    $fileName = basename($_FILES['files']['name'][$key]);
+                    $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+                    if ($fileSize > MAX_FILE_SIZE) {
+                        $errors[] = "File $fileName exceeds maximum size of 10MB";
+                        continue;
+                    }
+
+                    if (!in_array($fileExt, $allowedFileTypes)) {
+                        $errors[] = "File type $fileExt is not allowed for $fileName";
+                        continue;
+                    }
+
+                    // Generate unique filename
+                    $newFileName = uniqid() . '_' . preg_replace('/[^a-zA-Z0-9\.]/', '_', $fileName);
+                    $filePath = UPLOAD_DIR . $newFileName;
+
+                    if (move_uploaded_file($tmpName, $filePath)) {
+                        $uploadedFiles[] = [
+                            'name' => $fileName,
+                            'path' => $filePath,
+                            'type' => $_FILES['files']['type'][$key]
+                        ];
+                    } else {
+                        $errors[] = "Failed to upload file: $fileName";
+                    }
+                }
+            }
+        }
+
+        // If no errors, process the form
+        if (empty($errors)) {
+            try {
+                // Connect to database
+                $db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
+                $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                // Check if client exists
+                $stmt = $db->prepare("SELECT id FROM clients WHERE email = ?");
+                $stmt->execute([$formData['email']]);
+                $clientId = $stmt->fetchColumn();
+
+                // Insert quote request
+                $stmt = $db->prepare("
+                    INSERT INTO quote_requests 
+                    (client_id, name, email, phone, project_type, budget, timeline, message)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ");
+                $stmt->execute([
+                    $clientId ?: null,
+                    $formData['name'],
+                    $formData['email'],
+                    $formData['phone'],
+                    $formData['project-type'],
+                    $formData['budget'],
+                    $formData['timeline'],
+                    $formData['message']
+                ]);
+                $quoteRequestId = $db->lastInsertId();
+
+                // Save uploaded files
+                foreach ($uploadedFiles as $file) {
+                    $stmt = $db->prepare("
+                        INSERT INTO quote_request_files 
+                        (quote_request_id, file_name, file_path, file_type)
+                        VALUES (?, ?, ?, ?)
+                    ");
+                    $stmt->execute([
+                        $quoteRequestId,
+                        $file['name'],
+                        $file['path'],
+                        $file['type']
+                    ]);
+                }
+
+                // Send email notifications
+                sendEmailNotification($formData, $quoteRequestId, $uploadedFiles);
+                sendConfirmationEmail($formData);
+
+                $success = true;
+            } catch (PDOException $e) {
+                $errors[] = "Database error: " . $e->getMessage();
+            }
+        }
+    }
+}
+
+function sendEmailNotification($formData, $quoteRequestId, $uploadedFiles) {
+    $subject = "New Project Quote Request #$quoteRequestId";
+    
+    $message = "
+        <h2>New Project Quote Request</h2>
+        <p><strong>Request ID:</strong> #$quoteRequestId</p>
+        <p><strong>Name:</strong> {$formData['name']}</p>
+        <p><strong>Email:</strong> {$formData['email']}</p>
+        <p><strong>Phone:</strong> {$formData['phone']}</p>
+        <p><strong>Project Type:</strong> {$formData['project-type']}</p>
+        <p><strong>Budget:</strong> {$formData['budget']}</p>
+        <p><strong>Timeline:</strong> {$formData['timeline']}</p>
+        <p><strong>Project Details:</strong><br>" . nl2br($formData['message']) . "</p>
+    ";
+    
+    if (!empty($uploadedFiles)) {
+        $message .= "<p><strong>Attached Files:</strong><ul>";
+        foreach ($uploadedFiles as $file) {
+            $message .= "<li>{$file['name']}</li>";
+        }
+        $message .= "</ul></p>";
+    }
+    
+    $message .= "<p>You can view this request in the admin panel.</p>";
+    
+    $headers = [
+        'From: ' . FROM_NAME . ' <' . FROM_EMAIL . '>',
+        'Content-Type: text/html; charset=UTF-8',
+        'X-Mailer: PHP/' . phpversion()
+    ];
+    
+    mail(ADMIN_EMAIL, $subject, $message, implode("\r\n", $headers));
+}
+
+function sendConfirmationEmail($formData) {
+    $subject = "Thank you for your project quote request";
+    
+    $message = "
+        <h2>Thank You, {$formData['name']}!</h2>
+        <p>We've received your project quote request and our team will review it shortly.</p>
+        <p>Here's a summary of your request:</p>
+        <ul>
+            <li><strong>Project Type:</strong> {$formData['project-type']}</li>
+            <li><strong>Budget:</strong> {$formData['budget']}</li>
+            <li><strong>Timeline:</strong> {$formData['timeline']}</li>
+        </ul>
+        <p>We'll contact you within 2 business days to discuss your project in more detail.</p>
+        <p>If you have any immediate questions, please don't hesitate to contact us.</p>
+        <p>Best regards,<br>Construction Company Team</p>
+    ";
+    
+    $headers = [
+        'From: ' . FROM_NAME . ' <' . FROM_EMAIL . '>',
+        'Content-Type: text/html; charset=UTF-8',
+        'X-Mailer: PHP/' . phpversion()
+    ];
+    
+    mail($formData['email'], $subject, $message, implode("\r\n", $headers));
+}
+?>
+<?php
+include("../includes/header.php");
+?>
+    <link rel="stylesheet" href="../assets/css/contact-us.css">
     <!-- Hero Section -->
     <section class="contact-hero">
         <div class="container">
@@ -129,81 +313,118 @@
             <h2>Request a Project Quote</h2>
             <p class="text-center">Complete this form and our team will provide a customized estimate for your construction project</p>
             
-            <div class="form-container">
-                <form id="contactForm" action="#" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">Full Name*</label>
-                            <input type="text" id="name" name="name" required>
+            <?php if (!empty($errors)): ?>
+                <div class="alert alert-danger">
+                    <h4>Please fix the following errors:</h4>
+                    <ul>
+                        <?php foreach ($errors as $error): ?>
+                            <li><?php echo htmlspecialchars($error); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            
+            <?php if ($success): ?>
+                <div class="alert alert-success">
+                    <h4>Thank you for your request!</h4>
+                    <p>We've received your project quote request and will contact you shortly. A confirmation has been sent to your email address.</p>
+                </div>
+            <?php else: ?>
+                <div class="form-container">
+                    <form id="contactForm" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name*</label>
+                                <input type="text" id="name" name="name" required 
+                                    value="<?php echo isset($formData['name']) ? htmlspecialchars($formData['name']) : ''; ?>">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address*</label>
+                                <input type="email" id="email" name="email" required 
+                                    value="<?php echo isset($formData['email']) ? htmlspecialchars($formData['email']) : ''; ?>">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email Address*</label>
-                            <input type="email" id="email" name="email" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number*</label>
+                                <div class="phone-input-group">
+                                    <select id="country-code" name="country_code" style="width: 100px;">
+                                        <option value="+63">PH (+63)</option>
+                                        <option value="+1">US (+1)</option>
+                                        <!-- Add more country codes as needed -->
+                                    </select>
+                                    <input type="tel" id="phone" name="phone" required 
+                                        value="<?php echo isset($formData['phone']) ? htmlspecialchars($formData['phone']) : ''; ?>">
+                                </div>
+                                <small>Include area code (e.g., 9123456789)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="project-type">Project Type*</label>
+                                <select id="project-type" name="project-type" required>
+                                    <option value="">Select Project Type</option>
+                                    <option value="residential" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'residential' ? 'selected' : ''); ?>>Residential Construction</option>
+                                    <option value="commercial" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'commercial' ? 'selected' : ''); ?>>Commercial Construction</option>
+                                    <option value="industrial" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'industrial' ? 'selected' : ''); ?>>Industrial Facility</option>
+                                    <option value="infrastructure" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'infrastructure' ? 'selected' : ''); ?>>Infrastructure</option>
+                                    <option value="renovation" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'renovation' ? 'selected' : ''); ?>>Renovation/Remodeling</option>
+                                    <option value="other" <?php echo (isset($formData['project-type']) && $formData['project-type'] === 'other' ? 'selected' : ''); ?>>Other</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">Phone Number*</label>
-                            <input type="tel" id="phone" name="phone" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="budget">Estimated Budget*</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="">Select Budget Range</option>
+                                    <option value="under-1m" <?php echo (isset($formData['budget']) && $formData['budget'] === 'under-1m' ? 'selected' : ''); ?>>Under ₱1 Million</option>
+                                    <option value="1m-5m" <?php echo (isset($formData['budget']) && $formData['budget'] === '1m-5m' ? 'selected' : ''); ?>>₱1M - ₱5 Million</option>
+                                    <option value="5m-10m" <?php echo (isset($formData['budget']) && $formData['budget'] === '5m-10m' ? 'selected' : ''); ?>>₱5M - ₱10 Million</option>
+                                    <option value="10m-50m" <?php echo (isset($formData['budget']) && $formData['budget'] === '10m-50m' ? 'selected' : ''); ?>>₱10M - ₱50 Million</option>
+                                    <option value="over-50m" <?php echo (isset($formData['budget']) && $formData['budget'] === 'over-50m' ? 'selected' : ''); ?>>Over ₱50 Million</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="timeline">Project Timeline*</label>
+                                <select id="timeline" name="timeline" required>
+                                    <option value="">Select Timeline</option>
+                                    <option value="asap" <?php echo (isset($formData['timeline']) && $formData['timeline'] === 'asap' ? 'selected' : ''); ?>>ASAP</option>
+                                    <option value="1-3m" <?php echo (isset($formData['timeline']) && $formData['timeline'] === '1-3m' ? 'selected' : ''); ?>>1-3 Months</option>
+                                    <option value="3-6m" <?php echo (isset($formData['timeline']) && $formData['timeline'] === '3-6m' ? 'selected' : ''); ?>>3-6 Months</option>
+                                    <option value="6-12m" <?php echo (isset($formData['timeline']) && $formData['timeline'] === '6-12m' ? 'selected' : ''); ?>>6-12 Months</option>
+                                    <option value="over-1y" <?php echo (isset($formData['timeline']) && $formData['timeline'] === 'over-1y' ? 'selected' : ''); ?>>Over 1 Year</option>
+                                </select>
+                            </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label for="project-type">Project Type*</label>
-                            <select id="project-type" name="project-type" required>
-                                <option value="">Select Project Type</option>
-                                <option value="residential">Residential Construction</option>
-                                <option value="commercial">Commercial Construction</option>
-                                <option value="industrial">Industrial Facility</option>
-                                <option value="infrastructure">Infrastructure</option>
-                                <option value="renovation">Renovation/Remodeling</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <label for="message">Project Details*</label>
+                            <textarea id="message" name="message" required placeholder="Please describe your project including size, location, timeline, and any special requirements"><?php echo isset($formData['message']) ? htmlspecialchars($formData['message']) : ''; ?></textarea>
                         </div>
-                    </div>
-                    
-                    <div class="form-row">
+                        
                         <div class="form-group">
-                            <label for="budget">Estimated Budget*</label>
-                            <select id="budget" name="budget" required>
-                                <option value="">Select Budget Range</option>
-                                <option value="under-1m">Under ₱1 Million</option>
-                                <option value="1m-5m">₱1M - ₱5 Million</option>
-                                <option value="5m-10m">₱5M - ₱10 Million</option>
-                                <option value="10m-50m">₱10M - ₱50 Million</option>
-                                <option value="over-50m">Over ₱50 Million</option>
-                            </select>
+                            <label for="files">Upload Files (Optional)</label>
+                            <input type="file" id="files" name="files[]" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                            <small>You can upload plans, sketches, or reference images (Max 10MB, PDF, JPG, PNG, DOC allowed)</small>
                         </div>
-                        <div class="form-group">
-                            <label for="timeline">Project Timeline*</label>
-                            <select id="timeline" name="timeline" required>
-                                <option value="">Select Timeline</option>
-                                <option value="asap">ASAP</option>
-                                <option value="1-3m">1-3 Months</option>
-                                <option value="3-6m">3-6 Months</option>
-                                <option value="6-12m">6-12 Months</option>
-                                <option value="over-1y">Over 1 Year</option>
-                            </select>
+                        
+                        <!-- Simple CAPTCHA -->
+                        <div class="form-group captcha-group">
+                            <label for="captcha">What is 3 + 5? (Anti-spam)*</label>
+                            <input type="text" id="captcha" name="captcha" required>
                         </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Project Details*</label>
-                        <textarea id="message" name="message" required placeholder="Please describe your project including size, location, timeline, and any special requirements"></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="files">Upload Files (Optional)</label>
-                        <input type="file" id="files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
-                        <small>You can upload plans, sketches, or reference images (Max 10MB)</small>
-                    </div>
-                    
-                    <div class="form-submit">
-                        <button type="submit" class="btn">
-                            <i class="fas fa-paper-plane"></i> Submit Request
-                        </button>
-                    </div>
-                </form>
-            </div>
+                        
+                        <div class="form-submit">
+                            <button type="submit" class="btn">
+                                <i class="fas fa-paper-plane"></i> Submit Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            <?php endif; ?>
         </div>
     </section>
 
@@ -416,82 +637,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="contact-cta">
-        <div class="container">
-            <h2>Ready to Start Your Construction Project?</h2>
-            <p>Our team of experts is standing by to help bring your vision to life with quality craftsmanship and professional service.</p>
-            <div class="cta-buttons">
-                <a href="#contact-form" class="btn">Get a Free Quote</a>
-                <a href="tel:+63281234567" class="btn btn-outline"><i class="fas fa-phone"></i> Call Us Now</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>RC Ramos Construction</h3>
-                    <p>Building the future with excellence and integrity since 1985. Your trusted partner for quality construction across the Philippines.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="services.html">Services</a>
-                    <a href="projects.html">Projects</a>
-                    <a href="contact.html">Contact Us</a>
-                    <a href="#">Careers</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <a href="#">Precast Construction</a>
-                    <a href="#">Structural Engineering</a>
-                    <a href="#">General Contracting</a>
-                    <a href="#">Infrastructure</a>
-                    <a href="#">Renovations</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>194 Quezon Road, San Roque, Mexico, Pampanga Philippines 2021</p>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <p>+63 2 8123 4567<br>+63 912 345 6789</p>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <p>info@rcramos.com<br>sales@rcramos.com</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 RC Ramos Construction Corporation. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Floating Contact Button -->
-    <div class="floating-contact">
-        <a href="#contact-form" class="floating-btn">
-            <i class="fas fa-envelope"></i>
-        </a>
-    </div>
-
     <script>
         // FAQ Toggle Functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -568,5 +713,7 @@
             }
         }
     </script>
-</body>
-</html>
+
+<?php
+    include("../includes/footer.php");
+?>

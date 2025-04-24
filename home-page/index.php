@@ -1,70 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>R.C RAMOS &mdash; CONSTRUCTION CORPORATION</title>
-    <!-- Premium Font Imports -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+<?php
+include("../includes/header.php");
+?>
     <link rel="stylesheet" href="../assets/css/homepage.css" />
-    <link rel="stylesheet" href="../video-css-js/style.css" />
-    <link rel="stylesheet" href="../video-css-js/style.css" />
-  </head>
-  <body>
-    <!-- Header with Navigation -->
-    <header id="main-header">
-      <div class="container">
-        <nav class="navbar">
-          <a href="/" class="logo" aria-label="RC RAMOS Home">
-            <img
-              src="../images/logo-1.png"
-              alt="RC RAMOS Logo"
-              class="logo-image"
-            />
-          </a>
-
-          <button
-            class="mobile-menu-btn"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-          <ul class="nav-menu" id="nav-menu">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="#about" class="nav-link">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="#services" class="nav-link">Services</a>
-            </li>
-            <li class="nav-item">
-              <a href="#projects" class="nav-link">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a href="#contact" class="nav-link">Contact Us</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
 
     <!-- Hero Section with Video -->
     <section class="hero">
@@ -127,7 +64,7 @@
 
 ?
 
-    <div class="recruitment-container">
+  <div class="recruitment-container">
       <div class="recruitment-content">
           <h1 class="recruitment-title">Join the team, we're growing fast!</h1>
           <p class="recruitment-description">We're looking for incredible people to build on our strong momentum. Help us power the brands you know and love.</p>
@@ -692,102 +629,12 @@
       </div>
     </section> -->
 
-    <footer class="footer-section">
-      <div class="container">
-          <div class="footer-cta">
-              <div class="row">
-                  <div class="col-xl-4">
-                      <div class="single-cta">
-                          <i class="fas fa-map-marker-alt"></i>
-                          <div class="cta-text">
-                              <h4>Find us</h4>
-                              <span>Lorem ipsum dolor sit amet, consectetur</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-4">
-                      <div class="single-cta">
-                          <i class="fas fa-phone"></i>
-                          <div class="cta-text">
-                              <h4>Call us</h4>
-                              <span>0999-999-9999</span>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-4">
-                      <div class="single-cta">
-                          <i class="far fa-envelope-open"></i>
-                          <div class="cta-text">
-                              <h4>Mail us</h4>
-                              <span>mail@info.com</span>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="footer-content">
-              <div class="row">
-                  <div class="col-xl-4">
-                      <div class="footer-widget">
-                          <div class="footer-logo">
-                              <img src="../images/logoo.png" alt="logo">
-                          </div>
-                          <div class="footer-text">
-                              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut consectetur adipisicing elit.</p>
-                          </div>
-                          <div class="footer-social-icon">
-                              <span>Follow us</span>
-                              <a href="#" class="facebook-bg"><i class="fab fa-facebook-f"></i></a>
-                              <a href="#" class="twitter-bg"><i class="fab fa-twitter"></i></a>
-                              <a href="#" class="google-bg"><i class="fab fa-google-plus-g"></i></a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-4">
-                      <div class="footer-widget">
-                          <div class="footer-widget-heading">
-                              <h3>Useful Links</h3>
-                          </div>
-                          <ul>
-                              <li><a href="#">Home</a></li>
-                              <li><a href="#">Services</a></li>
-                              <li><a href="#">Portfolio</a></li>
-                              <li><a href="#">About us</a></li>
-                              <li><a href="#">Contact us</a></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-xl-4">
-                      <div class="footer-widget">
-                          <div class="footer-widget-heading">
-                              <h3>Subscribe</h3>
-                          </div>
-                          <div class="footer-text">
-                              <p>Don't miss to subscribe to our new feeds, kindly fill the form below.</p>
-                          </div>
-                          <div class="subscribe-form">
-                              <form action="#">
-                                  <input type="text" placeholder="Email Address">
-                                  <button type="submit"><i class="fab fa-telegram-plane"></i></button>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <div class="copyright-area">
-          <div class="container">
-              <div class="copyright-text">
-                  <p>Copyright &copy; 2024, All Right Reserved <a href="#">Rc Ramos Construction Corporation</a></p>
-              </div>
-          </div>
-      </div>
-  </footer>
+    <?php
+    include("../includes/footer.php");
+    ?>
 
-    <!-- Font Awesome for icons -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+  
+
     <!-- Load Latest jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Load jQuery Migrate to Fix Compatibility -->
@@ -995,5 +842,3 @@
         });
       });
     </script>
-  </body>
-</html>

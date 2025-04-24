@@ -1,75 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>R.C RAMOS &mdash; CONSTRUCTION CORPORATION</title>
-    <!-- Premium Font Imports -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-      rel="stylesheet"
-    />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../assets/css/footer.css">
-    <link rel="stylesheet" href="../assets/css/project.css" />
-    <link rel="stylesheet" href="../video-css-js/style.css" />
-    <link rel="stylesheet" href="../video-css-js/style.css" />
-  </head>
-  <body>
-    <!-- Header with Navigation -->
-    <header id="main-header">
-      <div class="container">
-        <nav class="navbar">
-          <a href="/" class="logo" aria-label="RC RAMOS Home">
-            <img
-              src="../images/logo-1.png"
-              alt="RC RAMOS Logo"
-              class="logo-image"
-            />
-          </a>
-
-          <button
-            class="mobile-menu-btn"
-            aria-label="Toggle menu"
-            aria-expanded="false"
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-
-          <ul class="nav-menu" id="nav-menu">
-            <li class="nav-item">
-              <a href="#" class="nav-link active">Home</a>
-            </li>
-            <li class="nav-item">
-              <a href="#about" class="nav-link">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a href="#services" class="nav-link">Services</a>
-            </li>
-            <li class="nav-item">
-              <a href="#projects" class="nav-link">Projects</a>
-            </li>
-            <li class="nav-item">
-              <a href="#contact" class="nav-link">Contact Us</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+<?php
+include("../includes/header.php");
+?>
 
     <!-- Hero Section with Video -->
     <section class="hero">
@@ -201,7 +132,53 @@
       </div>
     </section>
 
-    <section class="portfolio-wrapper">
+    <?php
+// Database connection
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "cms_db";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Get all industries for the filter buttons
+$industriesQuery = "SELECT DISTINCT industry FROM projects WHERE industry IS NOT NULL";
+$industriesResult = $conn->query($industriesQuery);
+$industries = [];
+
+if ($industriesResult->num_rows > 0) {
+    while($row = $industriesResult->fetch_assoc()) {
+        if (!empty($row['industry'])) {
+            $industries[] = $row['industry'];
+        }
+    }
+}
+
+// Select all projects
+$sql = "SELECT p.*, c.name as client_name 
+        FROM projects p
+        LEFT JOIN clients c ON p.client_id = c.id
+        ORDER BY p.created_at DESC";
+        
+$result = $conn->query($sql);
+
+// Store results in array
+$projects = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $projects[] = $row;
+    }
+}
+
+?>
+
+<section class="portfolio-wrapper">
       <div class="portfolio-container">
         <div class="section-header">
           <span class="portfolio-badge">PORTFOLIO</span>
@@ -218,130 +195,56 @@
           <button class="portfolio-filter-btn active" data-filter="all">
             All Projects
           </button>
-          <button class="portfolio-filter-btn" data-filter="residential">
-            Residential
+          <?php foreach ($industries as $industry): ?>
+          <button class="portfolio-filter-btn" data-filter="<?php echo strtolower(str_replace(' ', '-', $industry)); ?>">
+            <?php echo htmlspecialchars($industry); ?>
           </button>
-          <button class="portfolio-filter-btn" data-filter="commercial">
-            Commercial
-          </button>
-          <button class="portfolio-filter-btn" data-filter="infrastructure">
-            Infrastructure
-          </button>
-          <button class="portfolio-filter-btn" data-filter="industrial">
-            Industrial
-          </button>
+          <?php endforeach; ?>
         </div>
 
         <div class="portfolio-grid">
-          <!-- Project 1 -->
-          <div class="portfolio-item" data-category="healthcare">
+          <?php foreach ($projects as $project): 
+                // Convert industry to lowercase with hyphens for data-category
+                $categoryClass = !empty($project['industry']) ? 
+                    strtolower(str_replace(' ', '-', $project['industry'])) : 'other';
+                
+                // Get the first project image as thumbnail
+                $imageQuery = "SELECT file_path FROM project_images WHERE project_id = " . $project['id'] . " AND is_thumbnail = 1 LIMIT 1";
+                $imageResult = $conn->query($imageQuery);
+                $imagePath = "../images/default-project.png"; // Default image
+                
+                if ($imageResult && $imageResult->num_rows > 0) {
+                    $imageRow = $imageResult->fetch_assoc();
+                    $imagePath = "../uploads/projects/" . htmlspecialchars($imageRow['file_path']);
+                }
+          ?>
+          <!-- Project <?php echo $project['id']; ?> -->
+          <div class="portfolio-item" data-category="<?php echo $categoryClass; ?>">
             <div class="portfolio-item-img">
-              <img
-                src="../images/1-img.png"
-                alt="Modern Hospital Complex Project"
-              />
-              <div class="portfolio-category">Healthcare</div>
+              <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($project['name']); ?>" />
+              <div class="portfolio-category"><?php echo htmlspecialchars($project['industry'] ?? 'General'); ?></div>
             </div>
             <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">Modern Hospital Complex</h3>
+              <h3 class="portfolio-item-title"><?php echo htmlspecialchars($project['name']); ?></h3>
               <p class="portfolio-item-desc">
-                State-of-the-art medical facility designed with patient comfort
-                and advanced healthcare delivery in mind.
+                <?php 
+                // Display a short description - first 100 characters
+                $desc = !empty($project['description']) ? 
+                    htmlspecialchars(substr($project['description'], 0, 100)) . (strlen($project['description']) > 100 ? '...' : '') : 
+                    'No description available.';
+                echo $desc;
+                ?>
               </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
+              <a href="project.php?action=view&id=<?php echo $project['id']; ?>" class="portfolio-view-btn">View Project</a>
             </div>
           </div>
-
-          <!-- Project 2 -->
-          <div class="portfolio-item" data-category="sports">
-            <div class="portfolio-item-img">
-              <img
-                src="../images/3-img.png"
-                alt="Multi-purpose Stadium Project"
-              />
-              <div class="portfolio-category">Sports & Recreation</div>
-            </div>
-            <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">Multi-purpose Stadium</h3>
-              <p class="portfolio-item-desc">
-                Versatile sports arena with adjustable seating and
-                state-of-the-art facilities for various events.
-              </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
-            </div>
+          <?php endforeach; ?>
+          
+          <?php if (empty($projects)): ?>
+          <div class="no-projects-message">
+            <p>No projects found. Check back soon for our latest work!</p>
           </div>
-
-          <!-- Project 3 -->
-          <div class="portfolio-item" data-category="commercial">
-            <div class="portfolio-item-img">
-              <img
-                src="../images/2-img.png"
-                alt="Corporate Office Tower Project"
-              />
-              <div class="portfolio-category">Commercial</div>
-            </div>
-            <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">Corporate Office Tower</h3>
-              <p class="portfolio-item-desc">
-                Premium commercial space with modern architectural elements and
-                energy-efficient design.
-              </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
-            </div>
-          </div>
-
-          <!-- Project 4 -->
-          <div class="portfolio-item" data-category="residential">
-            <div class="portfolio-item-img">
-              <img src="../images/1_img.png" alt="Luxury Residential Complex" />
-              <div class="portfolio-category">Residential</div>
-            </div>
-            <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">Luxury Residential Complex</h3>
-              <p class="portfolio-item-desc">
-                Modern residential development featuring sustainable living and
-                cutting-edge architectural design.
-              </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
-            </div>
-          </div>
-
-          <!-- Project 5 -->
-          <div class="portfolio-item" data-category="infrastructure">
-            <div class="portfolio-item-img">
-              <img src="../images/2_img.png" alt="Urban Bridge Project" />
-              <div class="portfolio-category">Infrastructure</div>
-            </div>
-            <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">Urban Bridge Project</h3>
-              <p class="portfolio-item-desc">
-                Innovative bridge design connecting urban districts with
-                sustainable transportation solutions.
-              </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
-            </div>
-          </div>
-
-          <!-- Project 6 -->
-          <div class="portfolio-item" data-category="industrial">
-            <div class="portfolio-item-img">
-              <img
-                src="../images/img-1.jpg"
-                alt="Industrial Manufacturing Facility"
-              />
-              <div class="portfolio-category">Industrial</div>
-            </div>
-            <div class="portfolio-item-content">
-              <h3 class="portfolio-item-title">
-                Industrial Manufacturing Facility
-              </h3>
-              <p class="portfolio-item-desc">
-                Advanced manufacturing complex designed for efficiency, safety,
-                and technological innovation.
-              </p>
-              <a href="#" class="portfolio-view-btn">View Project</a>
-            </div>
-          </div>
+          <?php endif; ?>
         </div>
 
         <!-- Pagination -->
@@ -386,7 +289,7 @@
               <div class="ramos-carousel-item__content">
                 <div
                   class="ramos-carousel-item__image"
-                  style="background-image: url('/images/4-img.png')"
+                  style="background-image: url('../images/4-img.png')"
                   aria-label="Metropolitan Tower Project"
                 ></div>
                 <div class="ramos-carousel-item__info">
@@ -421,7 +324,7 @@
               <div class="ramos-carousel-item__content">
                 <div
                   class="ramos-carousel-item__image"
-                  style="background-image: url('/images/2_img.png')"
+                  style="background-image: url('../images/2_img.png')"
                 ></div>
                 <div class="ramos-carousel-item__info">
                   <span class="ramos-project-tag">Signature Project</span>
@@ -457,7 +360,7 @@
               <div class="ramos-carousel-item__content">
                 <div
                   class="ramos-carousel-item__image"
-                  style="background-image: url('/images/img-1.jpg')"
+                  style="background-image: url('../images/img-1.jpg')"
                 ></div>
                 <div class="ramos-carousel-item__info">
                   <span class="ramos-project-tag">Signature Project</span>
@@ -526,7 +429,7 @@
               <div class="ramos-carousel-item__content">
                 <div
                   class="ramos-carousel-item__image"
-                  style="background-image: url('/images/on-going.jpg')"
+                  style="background-image: url('../images/on-going.jpg')"
                 ></div>
                 <div class="ramos-carousel-item__info">
                   <span class="ramos-project-tag">Ongoing Project</span>
@@ -565,7 +468,7 @@
               <div class="ramos-carousel-item__content">
                 <div
                   class="ramos-carousel-item__image"
-                  style="background-image: url('/images/ongoing.jpg')"
+                  style="background-image: url('../images/ongoing.jpg')"
                 ></div>
                 <div class="ramos-carousel-item__info">
                   <span class="ramos-project-tag">Ongoing Project</span>
@@ -606,136 +509,6 @@
         </div>
       </section>
     </div>
-
-    <section class="rcrcc-project-cta">
-      <div class="rcrcc-project-content">
-          <h1 class="rcrcc-project-title">Your Vision, Our Expertise</h1>
-          <p class="rcrcc-project-description">
-              At RC Ramos Construction, we turn architectural dreams into tangible realities. 
-              Our commitment to innovation, precision, and quality ensures that every project 
-              we undertake becomes a benchmark of excellence.
-          </p>
-          <div class="rcrcc-project-cta-actions">
-              <a href="#consultation" class="rcrcc-project-btn rcrcc-project-btn-primary">
-                  <i class="fas fa-hammer"></i>Start Your Project
-              </a>
-              <a href="#portfolio" class="rcrcc-project-btn rcrcc-project-btn-secondary">
-                  <i class="fas fa-image"></i>Explore Our Portfolio
-              </a>
-          </div>
-      </div>
-  </section>
-
-    <footer class="footer-section">
-      <div class="container">
-        <div class="footer-cta">
-          <div class="row">
-            <div class="col-xl-4">
-              <div class="single-cta">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="cta-text">
-                  <h4>Find us</h4>
-                  <span>Lorem ipsum dolor sit amet, consectetur</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="single-cta">
-                <i class="fas fa-phone"></i>
-                <div class="cta-text">
-                  <h4>Call us</h4>
-                  <span>0999-999-9999</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="single-cta">
-                <i class="far fa-envelope-open"></i>
-                <div class="cta-text">
-                  <h4>Mail us</h4>
-                  <span>mail@info.com</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer-content">
-          <div class="row">
-            <div class="col-xl-4">
-              <div class="footer-widget">
-                <div class="footer-logo">
-                  <img src="../images/logoo.png" alt="logo" />
-                </div>
-                <div class="footer-text">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut consectetur adipisicing
-                    elit.
-                  </p>
-                </div>
-                <div class="footer-social-icon">
-                  <span>Follow us</span>
-                  <a href="#" class="facebook-bg"
-                    ><i class="fab fa-facebook-f"></i
-                  ></a>
-                  <a href="#" class="twitter-bg"
-                    ><i class="fab fa-twitter"></i
-                  ></a>
-                  <a href="#" class="google-bg"
-                    ><i class="fab fa-google-plus-g"></i
-                  ></a>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="footer-widget">
-                <div class="footer-widget-heading">
-                  <h3>Useful Links</h3>
-                </div>
-                <ul>
-                  <li><a href="#">Home</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Portfolio</a></li>
-                  <li><a href="#">About us</a></li>
-                  <li><a href="#">Contact us</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-xl-4">
-              <div class="footer-widget">
-                <div class="footer-widget-heading">
-                  <h3>Subscribe</h3>
-                </div>
-                <div class="footer-text">
-                  <p>
-                    Don't miss to subscribe to our new feeds, kindly fill the
-                    form below.
-                  </p>
-                </div>
-                <div class="subscribe-form">
-                  <form action="#">
-                    <input type="text" placeholder="Email Address" />
-                    <button type="submit">
-                      <i class="fab fa-telegram-plane"></i>
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="copyright-area">
-        <div class="container">
-          <div class="copyright-text">
-            <p>
-              Copyright &copy; 2024, All Right Reserved
-              <a href="#">Rc Ramos Construction Corporation</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
 
     <!-- Font Awesome for icons -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
@@ -920,5 +693,7 @@
         );
       });
     </script>
-  </body>
-</html>
+
+    <?php
+    include("../includes/footer.php");
+    ?>

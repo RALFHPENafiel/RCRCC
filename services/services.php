@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | RC Ramos Construction Corporation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/services.css">
-</head>
-<body>
+<?php
+    include("../includes/header.php");
+?>
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
@@ -446,75 +438,9 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Start Your Project?</h2>
-            <p>Get in touch with our team today for a free consultation and customized quote tailored to your construction needs.</p>
-            <div class="cta-buttons">
-                <a href="#contact" class="btn">Request a Free Quote</a>
-                <a href="tel:+6321234567" class="btn btn-outline"><i class="fas fa-phone"></i> Call Us Now</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>RC Ramos Construction</h3>
-                    <p>Building the future with excellence and integrity since 1995. Your trusted partner for quality construction across the Philippines.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <a href="#">Home</a>
-                    <a href="#">Services</a>
-                    <a href="#">Projects</a>
-                    <a href="#">About Us</a>
-                    <a href="#">Careers</a>
-                    <a href="#">Contact</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Services</h3>
-                    <a href="#">Precast Construction</a>
-                    <a href="#">Structural Engineering</a>
-                    <a href="#">General Contracting</a>
-                    <a href="#">Infrastructure</a>
-                    <a href="#">Renovations</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3>Contact Us</h3>
-                    <div class="contact-info">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>123 Construction Avenue, Makati City, Metro Manila, Philippines</p>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-phone"></i>
-                        <p>+63 2 123 4567<br>+63 917 123 4567</p>
-                    </div>
-                    <div class="contact-info">
-                        <i class="fas fa-envelope"></i>
-                        <p>info@rcramosconstruction.com<br>sales@rcramosconstruction.com</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 RC Ramos Construction Corporation. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-            </div>
-        </div>
-    </footer>
-
+<?php
+    include("../includes/footer.php");
+?>
     <script>
         // Partners Tab Functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -544,5 +470,3 @@
             });
         });
     </script>
-</body>
-</html>

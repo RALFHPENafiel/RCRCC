@@ -112,7 +112,7 @@ p {
 /* ===== Hero Section ===== */
 .hero {
   background: linear-gradient(rgba(26, 26, 26, 0.85), rgba(26, 26, 26, 0.85)),
-    url("/images/rcrcc.jpg") no-repeat center center/cover;
+    url("../../images/rcrcc.jpg") no-repeat center center/cover;
   height: 80vh;
   min-height: 600px;
   display: flex;

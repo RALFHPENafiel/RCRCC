@@ -1,0 +1,223 @@
+/* Project Detail Page Styles - With Unique Class Names */
+
+/* Project Hero Section */
+.proj-detail-hero-section {
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.proj-detail-hero-image-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.proj-detail-hero-img {
+    width: 100%;
+    height: 100%;   
+    object-fit: cover;
+}
+
+/* Project Detail Container */
+.proj-detail-main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+/* Text Center Section */
+.proj-detail-header-text-center {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.proj-detail-page-subtitle {
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.proj-detail-main-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #000;
+}
+
+.proj-detail-page-tagline {
+    font-size: 16px;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Project Content */
+.proj-detail-content-wrapper {
+    margin-top: 40px;
+}
+
+/* Project Overview Section */
+.proj-detail-overview-section {
+    margin-bottom: 60px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 40px;
+}
+
+.proj-detail-section-heading {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #000;
+    line-height: 1.3;
+}
+
+.proj-detail-description-block {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    max-width: 800px;
+}
+
+.proj-detail-description-text {
+    margin-bottom: 15px;
+}
+
+/* Project Details Grid */
+.proj-detail-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 80px;
+    margin-bottom: 60px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 40px;
+}
+
+.proj-detail-info-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.proj-detail-info-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #777;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.proj-detail-info-value {
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+}
+
+/* Project Gallery */
+.proj-detail-gallery-section {
+    margin-bottom: 60px;
+}
+
+.proj-detail-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.proj-detail-gallery-item {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.proj-detail-gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.proj-detail-gallery-img:hover {
+    transform: scale(1.05);
+}
+
+/* Back to Portfolio Button */
+.proj-detail-nav-footer {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.proj-detail-back-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.proj-detail-back-btn:hover {
+    background-color: #333;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 992px) {
+    .proj-detail-hero-section {
+        height: 350px;
+    }
+    
+    .proj-detail-main-title {
+        font-size: 32px;
+    }
+    
+    .proj-detail-section-heading {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .proj-detail-hero-section {
+        height: 300px;
+    }
+    
+    .proj-detail-main-title {
+        font-size: 28px;
+    }
+    
+    .proj-detail-info-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .proj-detail-gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .proj-detail-gallery-item {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .proj-detail-hero-section {
+        height: 250px;
+    }
+    
+    .proj-detail-main-title {
+        font-size: 24px;
+    }
+    
+    .proj-detail-main-container {
+        padding: 40px 15px;
+    }
+    
+    .proj-detail-section-heading {
+        font-size: 22px;
+    }
+}
